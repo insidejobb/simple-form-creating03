@@ -7,10 +7,10 @@ import Button from '../UI/Button/Button';
 
 const emailReaducer=(state,action)=>{
   if(action.type==='USER_INPUT'){
-    return{value:action.val,isValid:action.valid.includes('@')};
+    return{value:action.val,isValid:action.val.includes('@')};
   }
   if(action.type==='INPUT_BLUR'){
-    return {value:state.value,isValid:state.valid.includes('@')};
+    return {value:state.value,isValid:state.value.includes('@')};
   }
   return{value:'',isValid:false};
 };
@@ -25,14 +25,14 @@ const Login = (props) => {
 
   const [emailState,dispatchEmail]=useReducer(emailReaducer,{
     value:'',
-    isValid:false,
+    isValid:null,
 
-  })
+  });
   useEffect=(()=>{
-    console.log('EFFECR RUNNING');
+    console.log('EFFECT RUNNING');
     return()=>{
       console.log('EFFECT CLEANUP');
-    }
+    };
     
   },[]);
 
@@ -43,10 +43,10 @@ const Login = (props) => {
   //   enteredEmail.includes('@') && enteredPassword.trim().length>6
   //  );
   //   },500);
-  //   return (()=>{
+  //   return ()=>{
   //     console.log('CLEAN');
   //     clearTimeout(identifier);
-  //   })
+  //   };
   //  },[enteredEmail,setEnteredPassword])
 
   const emailChangeHandler = (event) => {
@@ -83,14 +83,14 @@ const Login = (props) => {
       <form onSubmit={submitHandler}>
         <div
           className={`${classes.control} ${
-            emailState === false ? classes.invalid : ''
+            emailState.isValid === false ? classes.invalid : ''
           }`}
         >
           <label htmlFor="email">E-Mail</label>
           <input
             type="email"
             id="email"
-            value={emailState}
+            value={emailState.value}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
           />
