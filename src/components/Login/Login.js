@@ -49,13 +49,13 @@ const Login = (props) => {
   //   };
   //  },[enteredEmail,setEnteredPassword])
 
-  // const emailChangeHandler = (event) => {
-  //   dispatchEmail({type:'USER_INPUT',val:event.target.value});
+  const emailChangeHandler = (event) => {
+    dispatchEmail({type:'USER_INPUT',val:event.target.value});
 
-  //   setFormIsValid(
-  //     event.target.value.includes('@') && enteredPassword.trim().length > 6
-  //   );
-  // };
+    setFormIsValid(
+      event.target.value.includes('@') && enteredPassword.trim().length > 6
+    );
+  };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
